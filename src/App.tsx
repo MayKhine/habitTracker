@@ -3,67 +3,20 @@ import "./App.css"
 import { Habit } from "./components/Habits"
 import { HabitsCanvas } from "./styledComponents/HabitsCanvas"
 import { DateTime } from "luxon"
+import { Week, useWeeklyHabits } from "./hooks/useWeeklyHabits"
+
 function App() {
-  const [habitTracker, setHabitTracker] = useState<JSON>(
-    JSON.parse(localStorage.getItem("habitTracker")) || {}
-  )
-  const [habits, setHabits] = useState<Array<string>>([])
-  const [habitText, setHabitText] = useState<string>("")
+  const { weeks, addHabit } = useWeeklyHabits()
+  const [habitText, setHabitText] = useState("")
+  console.log("Weeks: ", weeks)
 
-  const now = DateTime.now()
-  const weekNumber = now.weekNumber
-  const weekDay = now.weekday
-
-  // console.log("HABIT TRACKER FROM LOCALSTORAGE: ", habitTracker)
-
-  const addHabit = () => {
-    console.log("Add Habit is clicked", habits)
-    //get the current week
-    setHabits((habits) => [...habits, habitText])
+  const onClickAddHabit = () => {
+    console.log("Add habit")
+    addHabit(habitText)
     setHabitText("")
-    // go to current  week no and add it in the habits list
-    const curWeekHabitList =
-      habitTracker["weekNo"] == weekNumber ? habitTracker["habitList"] : []
-
-    const newHabit = {
-      name: habitText,
-      achievement: [0, 0, 0, 0, 0, 0, 0],
-    }
-
-    curWeekHabitList.push(newHabit)
-    console.log(
-      "updatedWeekHabitList , ",
-      curWeekHabitList,
-      habitTracker["habitList"]
-    )
-
-    // const newHabitTracker =
-    //   habitTracker["weekNo"] == weekNumber ? habitTracker : {}
-    // console.log("newHabitTracker: ", newHabitTracker)
-    // newHabitTracker.habitList = curWeekHabitList
-
-    //get cur week's habit list
-    // setHabitTracker((habitTracker) => {
-    //   curWeekHabitList
-    // })
   }
 
-  //set up the habits for the first time then commented it out
-  useEffect(() => {
-    console.log("Use Efffect is called")
-    // localStorage.setItem("habitTracker", JSON.stringify(habitTracker))
-
-    localStorage.setItem(
-      "habitTracker",
-      JSON.stringify({
-        weekNo: 38,
-        habitList: [
-          { name: "study", achievement: [1, 1, 1, 0, 0, 0, 0] },
-          { name: "exercise", achievement: [1, 1, 1, 0, 0, 0, 0] },
-        ],
-      })
-    )
-  }, [habitTracker])
+  const curWeek: Week | undefined = weeks[weeks.length - 1]
 
   return (
     <>
@@ -75,12 +28,12 @@ function App() {
           setHabitText(e.target.value)
         }}
       ></input>
-      <button onClick={addHabit}>Add</button>
+      <button onClick={onClickAddHabit}>Add</button>
       <div>
-        {habits.map((e) => {
+        {curWeek?.habitList.map((habit) => {
           return (
             <HabitsCanvas backgroundColor="red" width="50px" height="50px">
-              <Habit habitText={e}></Habit>
+              <Habit habitText={habit.name}></Habit>
             </HabitsCanvas>
           )
         })}

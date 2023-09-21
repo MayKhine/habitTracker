@@ -1,0 +1,13 @@
+{
+  "week": 1,
+  "habitList": [
+    {
+      "name": "exercise",
+      "achievement": [0, 1, 1, 1, 0, 0, 1]
+    },
+    {
+      "name": "study",
+      "achievement": [1, 1, 1, 0, 0, 0, 0]
+    }
+  ]
+}
