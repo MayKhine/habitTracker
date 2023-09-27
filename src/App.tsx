@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import "./App.css"
-import { Habit } from "./components/Habit"
-import { HabitsCanvas } from "./styledComponents/HabitsCanvas"
+// import { Habit } from "./components/Habit"
+// import { HabitsCanvas } from "./styledComponents/HabitsCanvas"
 import { DateTime } from "luxon"
-import { Week, useWeeklyHabits } from "./hooks/useWeeklyHabits"
+// import { Week, useWeeklyHabits } from "./hooks/useWeeklyHabits"
 
+import { useHabitTracker } from "./hooks/useHabitTracker"
 function App() {
   // const { weeks, addHabit } = useWeeklyHabits()
   // const [habitText, setHabitText] = useState("")
@@ -19,8 +20,11 @@ function App() {
   // const curWeek: Week | undefined = weeks[weeks.length - 1]
 
   const [habitTrackerTitle, setHabitTrackerTitle] = useState("")
-  const [habitTrackerStartDate, setHabitTrackerStartDate] = useState()
-  const [habitTracketEndDate, setHabitTrackerEndDate] = useState()
+  const [habitTrackerStartDate, setHabitTrackerStartDate] = useState("")
+  const [habitTracketEndDate, setHabitTrackerEndDate] = useState("")
+  const { localStorageHabitTrackerData, addHabitTrackerData } =
+    useHabitTracker()
+
   const onHabitTrackerHandler = () => {
     console.log(
       "Create a new habit tracker",
@@ -32,6 +36,11 @@ function App() {
     setHabitTrackerTitle("")
     setHabitTrackerStartDate("")
     setHabitTrackerEndDate("")
+    addHabitTrackerData(
+      habitTrackerTitle,
+      habitTrackerStartDate,
+      habitTracketEndDate
+    )
   }
   return (
     <>
