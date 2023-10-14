@@ -26,8 +26,11 @@ function App() {
     useHabitTracker()
 
   const onHabitTrackerHandler = () => {
+    if (habitTrackerTitle.length == 0) {
+      return
+    }
     console.log(
-      "Create a new habit tracker",
+      "IN APP: Create a new habit tracker",
       habitTrackerTitle,
       habitTrackerStartDate,
       habitTracketEndDate
@@ -44,7 +47,6 @@ function App() {
   }
   return (
     <>
-      habit tracker
       {/* <div>
         <input
           type="text"
@@ -66,29 +68,37 @@ function App() {
       </div> */}
       <div>
         <div>
-          <input
-            onChange={(event) => {
-              setHabitTrackerTitle(event.target.value)
-            }}
-            value={habitTrackerTitle}
-          ></input>
-          <input
-            type="date"
-            onChange={(event) => {
-              console.log("Date is changed", event?.target.value)
-              setHabitTrackerStartDate(event?.target.value)
-            }}
-            value={habitTrackerStartDate}
-          ></input>
-          <input
-            type="date"
-            onChange={(event) => {
-              setHabitTrackerEndDate(event?.target.value)
-            }}
-            value={habitTracketEndDate}
-          ></input>
+          <div>
+            <label>Habit Tracker Name</label>
+            <input
+              onChange={(event) => {
+                setHabitTrackerTitle(event.target.value)
+              }}
+              value={habitTrackerTitle}
+            ></input>
+          </div>
+          <div>
+            <label> Starting Date</label>
+            <input
+              type="date"
+              onChange={(event) => {
+                setHabitTrackerStartDate(event?.target.value)
+              }}
+              value={habitTrackerStartDate}
+            ></input>
+          </div>
+          <div>
+            <label> Ending Date</label>
+            <input
+              type="date"
+              onChange={(event) => {
+                setHabitTrackerEndDate(event?.target.value)
+              }}
+              value={habitTracketEndDate}
+            ></input>
+          </div>
         </div>
-        <button onClick={onHabitTrackerHandler}>Create Habit Tracket</button>
+        <button onClick={onHabitTrackerHandler}>Create</button>
       </div>
     </>
   )

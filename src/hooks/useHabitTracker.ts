@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export type HabitTrackerArr = Array<HabitTracker>
 
@@ -14,33 +14,50 @@ export type Habit = {
   achievement: Array<boolean>
 }
 
-const LOCAL_STORAGE_KEY = "rjqa;oweifnawkegui"
+const LOCAL_STORAGE_KEY = "useHabitTracker"
 
 const getLocalStorageHabitTrackerData = () => {
   const localStorageData = localStorage.getItem(LOCAL_STORAGE_KEY)
+
   if (!localStorageData) {
     return []
   }
   return JSON.parse(localStorageData)
 }
 
+const setLocalStorageHabitTrackerData = (data) => {
+  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data))
+}
+
 export const useHabitTracker = () => {
-  const [habitTrackerData, setHabitTrackerData] = useState(
+  const [localStgHabitTrackerData, setLocalStgHabitTrackerData] = useState(
     getLocalStorageHabitTrackerData
   )
+
+  useEffect(() => {
+    console.log(
+      "UseEffect is updated and this is current ",
+      localStgHabitTrackerData
+    )
+  }, [localStgHabitTrackerData])
 
   const addHabitTrackerData = (
     title: string,
     startDate: string,
     endDate: string
   ) => {
+    const newHabitTracker = { title, startDate, endDate }
     console.log(
-      "Add habit tracker data in useHabit tracker.ts",
-      title,
-      startDate,
-      endDate
+      "UseHabitTracker.ts:  ",
+      localStgHabitTrackerData,
+      "and New data: ",
+      title
     )
-  }
 
-  return { habitTrackerData, addHabitTrackerData }
+    setLocalStgHabitTrackerData((prevData) => [...prevData, newHabitTracker])
+
+    console.log("What is current habit data: ", localStgHabitTrackerData)
+    setLocalStorageHabitTrackerData(localStgHabitTrackerData)
+  }
+  return { localStgHabitTrackerData, addHabitTrackerData }
 }
