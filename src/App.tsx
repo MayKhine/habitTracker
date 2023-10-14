@@ -6,6 +6,7 @@ import "./App.css"
 // import { Week, useWeeklyHabits } from "./hooks/useWeeklyHabits"
 
 import { useHabitTracker } from "./hooks/useHabitTracker"
+import { HabitTracker } from "./components/HabitTracker"
 function App() {
   // const { weeks, addHabit } = useWeeklyHabits()
   // const [habitText, setHabitText] = useState("")
@@ -101,7 +102,12 @@ function App() {
         </div>
         <button onClick={onHabitTrackerHandler}>Create</button>
       </div>
-      <div></div>
+      <div>
+        {localStgHabitTrackerData.map((item) => {
+          console.log("Item: ", item["title"])
+          return <HabitTracker title={item.title} />
+        })}
+      </div>
     </>
   )
 }

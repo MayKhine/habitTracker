@@ -6,7 +6,7 @@ export type HabitTracker = {
   habitTrackerTitle: string
   startDate: string
   endDate: string
-  habits: Array<Habit>
+  // habits: Array<Habit>
 }
 
 export type Habit = {
