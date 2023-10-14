@@ -2,7 +2,7 @@ import { useState } from "react"
 import "./App.css"
 // import { Habit } from "./components/Habit"
 // import { HabitsCanvas } from "./styledComponents/HabitsCanvas"
-import { DateTime } from "luxon"
+// import { DateTime } from "luxon"
 // import { Week, useWeeklyHabits } from "./hooks/useWeeklyHabits"
 
 import { useHabitTracker } from "./hooks/useHabitTracker"
@@ -22,8 +22,7 @@ function App() {
   const [habitTrackerTitle, setHabitTrackerTitle] = useState("")
   const [habitTrackerStartDate, setHabitTrackerStartDate] = useState("")
   const [habitTracketEndDate, setHabitTrackerEndDate] = useState("")
-  const { localStorageHabitTrackerData, addHabitTrackerData } =
-    useHabitTracker()
+  const { localStgHabitTrackerData, addHabitTrackerData } = useHabitTracker()
 
   const onHabitTrackerHandler = () => {
     if (habitTrackerTitle.length == 0) {
@@ -45,6 +44,8 @@ function App() {
       habitTracketEndDate
     )
   }
+
+  console.log("Here is data: ", localStgHabitTrackerData)
   return (
     <>
       {/* <div>
@@ -100,6 +101,7 @@ function App() {
         </div>
         <button onClick={onHabitTrackerHandler}>Create</button>
       </div>
+      <div></div>
     </>
   )
 }

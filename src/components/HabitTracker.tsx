@@ -4,6 +4,6 @@ export type HabitTracketProps = {
   endDate: Date
   habits: Array<HabitProps>
 }
-export const HabitTracket = () => {
+export const HabitTracker = () => {
   return <>Habit Tracker </>
 }

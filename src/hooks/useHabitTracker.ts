@@ -25,7 +25,7 @@ const getLocalStorageHabitTrackerData = () => {
   return JSON.parse(localStorageData)
 }
 
-const setLocalStorageHabitTrackerData = (data) => {
+const setLocalStorageHabitTrackerData = (data: HabitTracker) => {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data))
 }
 
@@ -39,6 +39,7 @@ export const useHabitTracker = () => {
       "UseEffect is updated and this is current ",
       localStgHabitTrackerData
     )
+    setLocalStorageHabitTrackerData(localStgHabitTrackerData)
   }, [localStgHabitTrackerData])
 
   const addHabitTrackerData = (
@@ -47,17 +48,11 @@ export const useHabitTracker = () => {
     endDate: string
   ) => {
     const newHabitTracker = { title, startDate, endDate }
-    console.log(
-      "UseHabitTracker.ts:  ",
-      localStgHabitTrackerData,
-      "and New data: ",
-      title
-    )
-
-    setLocalStgHabitTrackerData((prevData) => [...prevData, newHabitTracker])
-
-    console.log("What is current habit data: ", localStgHabitTrackerData)
-    setLocalStorageHabitTrackerData(localStgHabitTrackerData)
+    setLocalStgHabitTrackerData((prevData: Array<HabitTracker>) => [
+      ...prevData,
+      newHabitTracker,
+    ])
   }
+  console.log("About to return: ", localStgHabitTrackerData)
   return { localStgHabitTrackerData, addHabitTrackerData }
 }
