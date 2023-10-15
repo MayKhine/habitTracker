@@ -35,10 +35,6 @@ export const useHabitTracker = () => {
   )
 
   useEffect(() => {
-    console.log(
-      "UseEffect is updated and this is current ",
-      localStgHabitTrackerData
-    )
     setLocalStorageHabitTrackerData(localStgHabitTrackerData)
   }, [localStgHabitTrackerData])
 
@@ -53,6 +49,5 @@ export const useHabitTracker = () => {
       newHabitTracker,
     ])
   }
-  console.log("About to return: ", localStgHabitTrackerData)
   return { localStgHabitTrackerData, addHabitTrackerData }
 }

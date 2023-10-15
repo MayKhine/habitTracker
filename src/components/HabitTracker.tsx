@@ -6,7 +6,5 @@ export type HabitTrackerProps = {
   // children: JSX.Element
 }
 export const HabitTracker = (props: HabitTrackerProps) => {
-  console.log("In habit tracker: ", props, props.title)
-
   return <div>{props.title} </div>
 }

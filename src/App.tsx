@@ -8,18 +8,6 @@ import "./App.css"
 import { useHabitTracker } from "./hooks/useHabitTracker"
 import { HabitTracker } from "./components/HabitTracker"
 function App() {
-  // const { weeks, addHabit } = useWeeklyHabits()
-  // const [habitText, setHabitText] = useState("")
-  // console.log("Weeks: ", weeks)
-
-  // const onClickAddHabit = () => {
-  //   console.log("Add habit")
-  //   addHabit(habitText)
-  //   setHabitText("")
-  // }
-
-  // const curWeek: Week | undefined = weeks[weeks.length - 1]
-
   const [habitTrackerTitle, setHabitTrackerTitle] = useState("")
   const [habitTrackerStartDate, setHabitTrackerStartDate] = useState("")
   const [habitTracketEndDate, setHabitTrackerEndDate] = useState("")
@@ -29,12 +17,6 @@ function App() {
     if (habitTrackerTitle.length == 0) {
       return
     }
-    console.log(
-      "IN APP: Create a new habit tracker",
-      habitTrackerTitle,
-      habitTrackerStartDate,
-      habitTracketEndDate
-    )
 
     setHabitTrackerTitle("")
     setHabitTrackerStartDate("")
@@ -46,28 +28,8 @@ function App() {
     )
   }
 
-  console.log("Here is data: ", localStgHabitTrackerData)
   return (
     <>
-      {/* <div>
-        <input
-          type="text"
-          value={habitText}
-          onChange={(e) => {
-            setHabitText(e.target.value)
-          }}
-        ></input>
-        <button onClick={onClickAddHabit}>Add</button>
-        <div>
-          {curWeek?.habitList.map((habit) => {
-            return (
-              <HabitsCanvas backgroundColor="red" width="50px" height="50px">
-                <Habit habitText={habit.name}></Habit>
-              </HabitsCanvas>
-            )
-          })}
-        </div>
-      </div> */}
       <div>
         <div>
           <div>
@@ -104,7 +66,6 @@ function App() {
       </div>
       <div>
         {localStgHabitTrackerData.map((item) => {
-          console.log("Item: ", item["title"])
           return <HabitTracker title={item.title} />
         })}
       </div>
