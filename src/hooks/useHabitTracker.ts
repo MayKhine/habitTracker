@@ -1,18 +1,5 @@
 import { useState, useEffect } from "react"
-
-export type HabitTrackerArr = Array<HabitTracker>
-
-export type HabitTracker = {
-  habitTrackerTitle: string
-  startDate: string
-  endDate: string
-  // habits: Array<Habit>
-}
-
-export type Habit = {
-  habitName: string
-  achievement: Array<boolean>
-}
+import { HabitTrackerProps } from "../components/HabitTypes"
 
 const LOCAL_STORAGE_KEY = "useHabitTracker"
 
@@ -25,7 +12,7 @@ const getLocalStorageHabitTrackerData = () => {
   return JSON.parse(localStorageData)
 }
 
-const setLocalStorageHabitTrackerData = (data: HabitTracker) => {
+const setLocalStorageHabitTrackerData = (data: HabitTrackerProps) => {
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(data))
 }
 
@@ -44,7 +31,7 @@ export const useHabitTracker = () => {
     endDate: string
   ) => {
     const newHabitTracker = { title, startDate, endDate }
-    setLocalStgHabitTrackerData((prevData: Array<HabitTracker>) => [
+    setLocalStgHabitTrackerData((prevData: Array<HabitTrackerProps>) => [
       ...prevData,
       newHabitTracker,
     ])

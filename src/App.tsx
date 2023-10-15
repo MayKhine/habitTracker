@@ -1,75 +1,43 @@
 import { useState } from "react"
-import "./App.css"
-// import { Habit } from "./components/Habit"
-// import { HabitsCanvas } from "./styledComponents/HabitsCanvas"
-// import { DateTime } from "luxon"
-// import { Week, useWeeklyHabits } from "./hooks/useWeeklyHabits"
+import classes from "./App.module.css"
 
 import { useHabitTracker } from "./hooks/useHabitTracker"
 import { HabitTracker } from "./components/HabitTracker"
+import { HabitTrackerForm } from "./components/HabitTrackerForm"
+import { HabitTrackerCreateForm } from "./UI/HabitTrackerCreateForm"
+import { HabitTrackerProps } from "./components/HabitTypes"
 function App() {
-  const [habitTrackerTitle, setHabitTrackerTitle] = useState("")
-  const [habitTrackerStartDate, setHabitTrackerStartDate] = useState("")
-  const [habitTracketEndDate, setHabitTrackerEndDate] = useState("")
+  // const [habitTrackerTitle, setHabitTrackerTitle] = useState("")
+  // const [habitTrackerStartDate, setHabitTrackerStartDate] = useState("")
+  // const [habitTracketEndDate, setHabitTrackerEndDate] = useState("")
   const { localStgHabitTrackerData, addHabitTrackerData } = useHabitTracker()
 
-  const onHabitTrackerHandler = () => {
-    if (habitTrackerTitle.length == 0) {
+  const onHabitTrackerHandler = (habitTrackerData: HabitTrackerProps) => {
+    console.log("habitTrackerData: ", habitTrackerData)
+    if (habitTrackerData.title.length == 0) {
       return
     }
 
-    setHabitTrackerTitle("")
-    setHabitTrackerStartDate("")
-    setHabitTrackerEndDate("")
+    // setHabitTrackerTitle("")
+    // setHabitTrackerStartDate("")
+    // setHabitTrackerEndDate("")
     addHabitTrackerData(
-      habitTrackerTitle,
-      habitTrackerStartDate,
-      habitTracketEndDate
+      habitTrackerData.title,
+      habitTrackerData.startDate,
+      habitTrackerData.endDate
     )
   }
 
   return (
-    <>
-      <div>
-        <div>
-          <div>
-            <label>Habit Tracker Name</label>
-            <input
-              onChange={(event) => {
-                setHabitTrackerTitle(event.target.value)
-              }}
-              value={habitTrackerTitle}
-            ></input>
-          </div>
-          <div>
-            <label> Starting Date</label>
-            <input
-              type="date"
-              onChange={(event) => {
-                setHabitTrackerStartDate(event?.target.value)
-              }}
-              value={habitTrackerStartDate}
-            ></input>
-          </div>
-          <div>
-            <label> Ending Date</label>
-            <input
-              type="date"
-              onChange={(event) => {
-                setHabitTrackerEndDate(event?.target.value)
-              }}
-              value={habitTracketEndDate}
-            ></input>
-          </div>
-        </div>
-        <button onClick={onHabitTrackerHandler}>Create</button>
-      </div>
+    <div style={classes.body}>
+      <HabitTrackerForm onHabitTrackerHandler={onHabitTrackerHandler} />
+
       <div>
         {localStgHabitTrackerData.map((item) => {
           return <HabitTracker title={item.title} />
         })}
       </div>
-    </>
+    </div>
   )
 }
 

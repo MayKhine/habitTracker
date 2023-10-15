@@ -1,10 +1,10 @@
-import { HabitProps } from "./Habit"
-export type HabitTrackerProps = {
-  title: string
-  startDate: string
-  endDate: string
-  // children: JSX.Element
-}
+import { HabitTrackerProps } from "./HabitTypes"
+import { CenterDiv } from "../UI/CenteredDiv"
+
 export const HabitTracker = (props: HabitTrackerProps) => {
-  return <div>{props.title} </div>
+  return (
+    <CenterDiv width="400px" height="30px" backgroundColor="pink">
+      {props.title}
+    </CenterDiv>
+  )
 }
