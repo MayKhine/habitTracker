@@ -1,6 +1,7 @@
 import { dark1, light3 } from "../UI/ColorPalette"
 import { HabitTrackerProps } from "./HabitTypes"
 import { HabitTrackerHeader } from "../Layout/HabitTrackerHeader"
+import { HabitList } from "./HabitList"
 
 export type HabitTrackerDivProps = {
   habitTracker: Array<HabitTrackerProps>
@@ -20,6 +21,7 @@ export const HabitTracker = (props: HabitTrackerDivProps) => {
         startDate={startDate}
         endDate={endDate}
       />
+      <HabitList></HabitList>
     </div>
   )
 }
