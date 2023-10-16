@@ -1,0 +1,6 @@
+export const light1 = "#faf5f5"
+export const light2 = "#f3e8d7"
+export const light3 = "#bdb0a7"
+export const dark1 = "#7a7675"
+export const dark2 = "#4c4a4e"
+export const dark3 = "#1d1d1d"

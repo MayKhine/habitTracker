@@ -1,16 +1,12 @@
-.flex-wrap {
-  flex-wrap: wrap;
-}
-
-.mainContent {
-  width: 100%;
+.sideBar {
+  width: "300px";
   background-color: yellow;
   display: flex;
   flex-direction: row;
 }
 
 @media (max-width: 768px) {
-  .mainContent {
+  .sideBar {
     width: 100%;
     background-color: red;
     flex-wrap: wrap;

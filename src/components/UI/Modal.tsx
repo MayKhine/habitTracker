@@ -1,6 +1,11 @@
 // import { createPortal } from "react-dom"
 import ReactDOM from "react-dom"
-const Backdrop = () => {
+
+type BackdropProps = {
+  onCloseModal: () => void
+}
+const Backdrop = (props: BackdropProps) => {
+  console.log("Backdrop props: ", props)
   return (
     <div
       style={{
@@ -13,6 +18,7 @@ const Backdrop = () => {
         backgroundColor: "gray",
         opacity: "50%",
       }}
+      onClick={props.onCloseModal}
     ></div>
   )
 }
@@ -47,6 +53,7 @@ type ModalProps = {
   height: string
   backgroundColor: string
   children: JSX.Element
+  onCloseModal: () => void
 }
 export const Modal = (props: ModalProps) => {
   const portalElement = document.getElementById("overlay")
@@ -60,7 +67,10 @@ export const Modal = (props: ModalProps) => {
         backgroundColor: props.backgroundColor,
       }}
     >
-      {ReactDOM.createPortal(<Backdrop />, portalElement)}
+      {ReactDOM.createPortal(
+        <Backdrop onCloseModal={props.onCloseModal} />,
+        portalElement
+      )}
       {ReactDOM.createPortal(
         <ModalOverLay backgroundColor={props.backgroundColor}>
           {props.children}

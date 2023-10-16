@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Tilt+Neon&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&family=Tilt+Neon&display=swap");
+html,
+body {
+  /* font-family: "Tilt Neon", sans-serif; */
+  font-family: "Poppins", sans-serif;
+
+  font-weight: 400;
+  width: 100%;
+  margin: 0px;
+  height: 100%;
+}
+
+body {
+  background-color: bisque;
+  display: flex;
+}

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { HabitTrackerProps } from "../components/HabitTypes"
+import { HabitTrackerProps } from "../components/HabitTracker/HabitTypes"
 
 const LOCAL_STORAGE_KEY = "useHabitTracker"
 
