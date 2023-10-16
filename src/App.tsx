@@ -4,7 +4,6 @@ import classes from "./App.module.css"
 import { useHabitTracker } from "./hooks/useHabitTracker"
 import { HabitTracker } from "./components/HabitTracker"
 import { HabitTrackerForm } from "./components/HabitTrackerForm"
-import { HabitTrackerCreateForm } from "./UI/HabitTrackerCreateForm"
 import { HabitTrackerProps } from "./components/HabitTypes"
 function App() {
   // const [habitTrackerTitle, setHabitTrackerTitle] = useState("")
@@ -12,15 +11,16 @@ function App() {
   // const [habitTracketEndDate, setHabitTrackerEndDate] = useState("")
   const { localStgHabitTrackerData, addHabitTrackerData } = useHabitTracker()
 
-  const onHabitTrackerHandler = (habitTrackerData: HabitTrackerProps) => {
+  const createHabitTrackerHandler = (habitTrackerData: {
+    title: string
+    startDate: string
+    endDate: string
+  }) => {
     console.log("habitTrackerData: ", habitTrackerData)
     if (habitTrackerData.title.length == 0) {
       return
     }
 
-    // setHabitTrackerTitle("")
-    // setHabitTrackerStartDate("")
-    // setHabitTrackerEndDate("")
     addHabitTrackerData(
       habitTrackerData.title,
       habitTrackerData.startDate,
@@ -30,11 +30,11 @@ function App() {
 
   return (
     <div style={classes.body}>
-      <HabitTrackerForm onHabitTrackerHandler={onHabitTrackerHandler} />
+      <HabitTrackerForm onCreateHabitTracker={createHabitTrackerHandler} />
 
       <div>
-        {localStgHabitTrackerData.map((item) => {
-          return <HabitTracker title={item.title} />
+        {localStgHabitTrackerData.map((item: HabitTrackerProps) => {
+          return <HabitTracker habitTracker={item} />
         })}
       </div>
     </div>

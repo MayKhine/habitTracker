@@ -1,12 +1,19 @@
 import { useState } from "react"
 import { HabitTrackerFormDiv } from "../UI/HabitTrackerFormDiv"
+import { Button } from "../UI/Button"
 export type HabitTrackerFormProp = {
-  onHabitTrackerHandler: any
+  onCreateHabitTracker: (formData: {
+    title: string
+    startDate: string
+    endDate: string
+  }) => void
 }
+
 export const HabitTrackerForm = (props: HabitTrackerFormProp) => {
   const [habitTrackerTitle, setHabitTrackerTitle] = useState("")
   const [habitTrackerStartDate, setHabitTrackerStartDate] = useState("")
   const [habitTracketEndDate, setHabitTrackerEndDate] = useState("")
+
   return (
     <HabitTrackerFormDiv>
       <div>
@@ -40,17 +47,20 @@ export const HabitTrackerForm = (props: HabitTrackerFormProp) => {
           ></input>
         </div>
       </div>
-      <button
-        onClick={() => {
-          props.onHabitTrackerHandler({
+      <Button
+        onButtonClick={() => {
+          setHabitTrackerTitle("")
+          setHabitTrackerStartDate("")
+          setHabitTrackerEndDate("")
+          props.onCreateHabitTracker({
             title: habitTrackerTitle,
             startDate: habitTrackerStartDate,
             endDate: habitTracketEndDate,
           })
         }}
-      >
-        Create
-      </button>
+        text="Create"
+        backgroundColor="pink"
+      />
     </HabitTrackerFormDiv>
   )
 }

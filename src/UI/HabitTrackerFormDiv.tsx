@@ -2,7 +2,7 @@ export type HabitTrackerFormDivProps = {
   children: JSX.Element
 }
 
-export const HabitTrackerFormDiv = (props) => {
+export const HabitTrackerFormDiv = (props: HabitTrackerFormDivProps) => {
   return (
     <div
       style={{
