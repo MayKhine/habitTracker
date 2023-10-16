@@ -5,6 +5,7 @@ export type ButtonProps = {
 }
 
 export const Button = (props: ButtonProps) => {
+  console.log("BUtton props: ", props)
   return (
     <button
       style={{ backgroundColor: props.backgroundColor }}
