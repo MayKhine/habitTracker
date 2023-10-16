@@ -9,6 +9,7 @@ export type HabitTrackerProps = {
 }
 
 export type HabitProps = {
+  id: string
   name: string
   achievements: Array<number>
 }

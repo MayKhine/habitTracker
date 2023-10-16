@@ -21,6 +21,12 @@ export const useHabitTracker = () => {
     getLocalStorageHabitTrackerData
   )
 
+  const calculateTotalDays = (startDate: string, endDate: string) => {
+    const date1 = new Date(startDate)
+    const date2 = new Date(endDate)
+    const diffTime = Math.abs(date2 - date1) + 1
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+  }
   useEffect(() => {
     setLocalStorageHabitTrackerData(localStgHabitTrackerData)
   }, [localStgHabitTrackerData])
@@ -30,13 +36,51 @@ export const useHabitTracker = () => {
     startDate: string,
     endDate: string
   ) => {
-    const newHabitTracker = { id: Math.random(), title, startDate, endDate }
+    const defaultHabitAchievements: Array<number> = []
+
+    const totalTrackingDays = calculateTotalDays(startDate, endDate)
+
+    for (let i = 0; i < totalTrackingDays; i++) {
+      if (i == 0) {
+        defaultHabitAchievements.push(1)
+      } else {
+        defaultHabitAchievements.push(0)
+      }
+    }
+
+    const newHabitTracker = {
+      id: Math.random(),
+      title,
+      startDate,
+      endDate,
+      habits: [
+        {
+          id: Math.random(),
+          name: "defaultHabit",
+          achievements: defaultHabitAchievements,
+        },
+      ],
+    }
     setLocalStgHabitTrackerData((prevData: Array<HabitTrackerProps>) => [
       ...prevData,
       newHabitTracker,
     ])
   }
-  return { localStgHabitTrackerData, addHabitTrackerData }
+
+  const updateHabitTrackerData = (
+    value: number,
+    index: number,
+    habitId: string,
+    trackerId: string
+  ) => {
+    console.log("local data", localStgHabitTrackerData, trackerId)
+  }
+
+  return {
+    localStgHabitTrackerData,
+    addHabitTrackerData,
+    updateHabitTrackerData,
+  }
 }
 
 export const getHabitTrackerByID = () => {

@@ -1,9 +1,18 @@
 import { HabitProps } from "./HabitTypes"
-
+import { Habit } from "./Habit"
 export type HabitListProps = {
-  habitList: Array<HabitProps>
+  trackerId: string
+  habits: Array<HabitProps>
 }
 
 export const HabitList = (props: HabitListProps) => {
-  return <div>Habit List </div>
+  return (
+    <div>
+      {props.habits.map((habit) => {
+        return (
+          <Habit key={habit.id} habit={habit} trackerId={props.trackerId} />
+        )
+      })}
+    </div>
+  )
 }

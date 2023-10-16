@@ -12,8 +12,7 @@ export const HabitTracker = (props: HabitTrackerDivProps) => {
     return
   }
 
-  const { id, title, startDate, endDate } = props.habitTracker[0]
-  console.log("Content: ", id, title, startDate, endDate)
+  const { id, title, startDate, endDate, habits } = props.habitTracker[0]
   return (
     <div style={{ backgroundColor: dark1, color: light3, flexGrow: "1" }}>
       <HabitTrackerHeader
@@ -21,7 +20,7 @@ export const HabitTracker = (props: HabitTrackerDivProps) => {
         startDate={startDate}
         endDate={endDate}
       />
-      <HabitList></HabitList>
+      <HabitList habits={habits} trackerId={id}></HabitList>
     </div>
   )
 }
