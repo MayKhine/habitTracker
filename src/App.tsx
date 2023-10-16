@@ -1,18 +1,21 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import classes from "./App.module.css"
 import { useHabitTracker } from "./hooks/useHabitTracker"
-import { HabitTracker } from "./components/HabitTracker/HabitTracker"
+import { HabitTrackerList } from "./components/HabitTracker/HabitTrackerList"
 import { HabitTrackerForm } from "./components/HabitTracker/HabitTrackerForm"
 import { HabitTrackerProps } from "./components/HabitTracker/HabitTypes"
 import { Modal } from "./components/UI/Modal"
 import { Button } from "./components/UI/Button"
 import { MainHeader } from "./components/Layout/MainHeader"
 import { SideBar } from "./components/Layout/SideBar"
-import { Content } from "./components/Layout/Content"
+import { HabitTracker } from "./components/HabitTracker/HabitTracker"
+import { light2 } from "./components/UI/ColorPalette"
 function App() {
   const { localStgHabitTrackerData, addHabitTrackerData } = useHabitTracker()
 
   const [showHabitTrackerForm, setShowHabitTrackerForm] = useState(false)
+  const [showSelectedHabitTracker, setShowSelectedHabitTracker] =
+    useState(false)
 
   const closeHabitTrackerFormHandler = () => {
     setShowHabitTrackerForm(false)
@@ -23,8 +26,6 @@ function App() {
     startDate: string
     endDate: string
   }) => {
-    console.log("habitTrackerData: ", habitTrackerData)
-
     closeHabitTrackerFormHandler()
 
     if (habitTrackerData.title.length == 0) {
@@ -38,14 +39,34 @@ function App() {
     )
   }
 
+  const [selectedHabitTrackerID, setSelectedHabitTrackerID] = useState<string>()
+  const [selectedHabitTracker, setSelectedHabitTracker] =
+    useState<Array<HabitTrackerProps>>()
+
+  const habitTrackerSelectHandler = (title: string, id: string) => {
+    console.log("Habit tracker is selected ", title, id)
+    setShowSelectedHabitTracker(true)
+    setSelectedHabitTrackerID(id)
+  }
+
+  useEffect(() => {
+    const selectedTracker = localStgHabitTrackerData.filter(
+      (item: HabitTrackerProps) => item.id == selectedHabitTrackerID
+    )
+    if (selectedTracker) {
+      setSelectedHabitTracker(selectedTracker)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedHabitTrackerID])
+
   return (
     <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
       <MainHeader />
       <div className={classes.mainContent}>
-        <SideBar width="300px">
+        <SideBar>
           <>
             <Button
-              backgroundColor="pink"
+              backgroundColor={light2}
               onButtonClick={() => {
                 setShowHabitTrackerForm(true)
               }}
@@ -55,24 +76,32 @@ function App() {
               <Modal
                 width="100%"
                 height="100%"
-                backgroundColor="pink"
+                backgroundColor={light2}
                 onCloseModal={closeHabitTrackerFormHandler}
               >
                 <HabitTrackerForm
+                  backgroundColor={light2}
                   onCreateHabitTracker={createHabitTrackerHandler}
                 />
               </Modal>
             )}
             <div>
               {localStgHabitTrackerData.map((item: HabitTrackerProps) => {
-                return <HabitTracker width="300px" habitTracker={item} />
+                return (
+                  <HabitTrackerList
+                    key={item.id}
+                    backgroundColor={light2}
+                    habitTracker={item}
+                    onHabitTrackerSelect={habitTrackerSelectHandler}
+                  />
+                )
               })}
             </div>
           </>
         </SideBar>
-        <Content>
-          <div>helllooooooo thisi contnet data</div>
-        </Content>
+        {showSelectedHabitTracker && (
+          <HabitTracker habitTracker={selectedHabitTracker} />
+        )}
       </div>
     </div>
   )

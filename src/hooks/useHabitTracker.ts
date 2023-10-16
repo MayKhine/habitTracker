@@ -30,11 +30,15 @@ export const useHabitTracker = () => {
     startDate: string,
     endDate: string
   ) => {
-    const newHabitTracker = { title, startDate, endDate }
+    const newHabitTracker = { id: Math.random(), title, startDate, endDate }
     setLocalStgHabitTrackerData((prevData: Array<HabitTrackerProps>) => [
       ...prevData,
       newHabitTracker,
     ])
   }
   return { localStgHabitTrackerData, addHabitTrackerData }
+}
+
+export const getHabitTrackerByID = () => {
+  return {}
 }

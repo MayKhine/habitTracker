@@ -1,28 +1,25 @@
+import { dark1, light3 } from "../UI/ColorPalette"
 import { HabitTrackerProps } from "./HabitTypes"
-import { CenterDiv } from "../UI/CenteredDiv"
+import { HabitTrackerHeader } from "../Layout/HabitTrackerHeader"
 
-export type HTProps = {
-  width: string
-  habitTracker: HabitTrackerProps
+export type HabitTrackerDivProps = {
+  habitTracker: Array<HabitTrackerProps>
 }
 
-export const HabitTracker = (props: HTProps) => {
-  console.log(props, props.habitTracker)
-  const { title, startDate, endDate } = props.habitTracker
+export const HabitTracker = (props: HabitTrackerDivProps) => {
+  if (props.habitTracker.length == 0) {
+    return
+  }
 
+  const { id, title, startDate, endDate } = props.habitTracker[0]
+  console.log("Content: ", id, title, startDate, endDate)
   return (
-    <CenterDiv width={props.width} height="30px" backgroundColor="pink">
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <div>{title} </div>
-        <div>{startDate} </div>
-        <div>{endDate} </div>
-      </div>
-    </CenterDiv>
+    <div style={{ backgroundColor: dark1, color: light3, flexGrow: "1" }}>
+      <HabitTrackerHeader
+        title={title}
+        startDate={startDate}
+        endDate={endDate}
+      />
+    </div>
   )
 }

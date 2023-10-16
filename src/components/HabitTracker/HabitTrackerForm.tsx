@@ -2,6 +2,7 @@ import { useState } from "react"
 import { HabitTrackerFormDiv } from "../UI/HabitTrackerFormDiv"
 import { Button } from "../UI/Button"
 export type HabitTrackerFormProp = {
+  backgroundColor: string
   onCreateHabitTracker: (formData: {
     title: string
     startDate: string

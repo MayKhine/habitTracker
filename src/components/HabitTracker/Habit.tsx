@@ -1,8 +1,9 @@
 import { FC } from "react"
 
 export type HabitProps = {
-  habitText: string
+  name: string
+  achievements: Array<number>
 }
-export const Habit: FC<HabitProps> = ({ habitText }) => {
-  return <>{habitText}</>
+export const Habit: FC<HabitProps> = (props: HabitProps) => {
+  return <>{props.name}</>
 }

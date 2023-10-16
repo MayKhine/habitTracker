@@ -1,6 +1,7 @@
 export type HabitTrackerArr = Array<HabitTrackerProps>
 
 export type HabitTrackerProps = {
+  id: string
   title: string
   startDate: string
   endDate: string
