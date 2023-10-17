@@ -1,8 +1,9 @@
-import { HabitProps } from "./HabitTypes"
+import { HabitProps, UpdateHabitTrackerFN } from "./HabitTypes"
 import { Habit } from "./Habit"
 export type HabitListProps = {
   trackerId: string
   habits: Array<HabitProps>
+  updateHabitTrackerData: UpdateHabitTrackerFN
 }
 
 export const HabitList = (props: HabitListProps) => {
@@ -10,7 +11,12 @@ export const HabitList = (props: HabitListProps) => {
     <div>
       {props.habits.map((habit) => {
         return (
-          <Habit key={habit.id} habit={habit} trackerId={props.trackerId} />
+          <Habit
+            key={habit.id}
+            habit={habit}
+            trackerId={props.trackerId}
+            updateHabitTrackerData={props.updateHabitTrackerData}
+          />
         )
       })}
     </div>

@@ -11,7 +11,11 @@ import { SideBar } from "./components/Layout/SideBar"
 import { HabitTracker } from "./components/HabitTracker/HabitTracker"
 import { light2 } from "./components/UI/ColorPalette"
 function App() {
-  const { localStgHabitTrackerData, addHabitTrackerData } = useHabitTracker()
+  const {
+    localStgHabitTrackerData,
+    addHabitTrackerData,
+    updateHabitTrackerData,
+  } = useHabitTracker()
 
   const [showHabitTrackerForm, setShowHabitTrackerForm] = useState(false)
   const [showSelectedHabitTracker, setShowSelectedHabitTracker] =
@@ -57,7 +61,7 @@ function App() {
       setSelectedHabitTracker(selectedTracker)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedHabitTrackerID])
+  }, [selectedHabitTrackerID, localStgHabitTrackerData])
 
   return (
     <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
@@ -100,7 +104,10 @@ function App() {
           </>
         </SideBar>
         {showSelectedHabitTracker && (
-          <HabitTracker habitTracker={selectedHabitTracker} />
+          <HabitTracker
+            habitTracker={selectedHabitTracker}
+            updateHabitTrackerData={updateHabitTrackerData}
+          />
         )}
       </div>
     </div>

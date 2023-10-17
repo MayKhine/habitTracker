@@ -5,7 +5,6 @@ const LOCAL_STORAGE_KEY = "useHabitTracker"
 
 const getLocalStorageHabitTrackerData = () => {
   const localStorageData = localStorage.getItem(LOCAL_STORAGE_KEY)
-
   if (!localStorageData) {
     return []
   }
@@ -27,7 +26,12 @@ export const useHabitTracker = () => {
     const diffTime = Math.abs(date2 - date1) + 1
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
   }
+
   useEffect(() => {
+    console.log(
+      "useEffect localStgHabitTrackerData change, set to localstr",
+      localStgHabitTrackerData[0].habits[0].achievements
+    )
     setLocalStorageHabitTrackerData(localStgHabitTrackerData)
   }, [localStgHabitTrackerData])
 
@@ -73,7 +77,26 @@ export const useHabitTracker = () => {
     habitId: string,
     trackerId: string
   ) => {
-    console.log("local data", localStgHabitTrackerData, trackerId)
+    const updatedData: Array<HabitTrackerProps> = localStgHabitTrackerData
+    console.log(
+      "Before mutating updatedData",
+      localStgHabitTrackerData[0].habits[0].achievements,
+      { value, index }
+    )
+    updatedData.forEach((tracker: HabitTrackerProps) => {
+      if (tracker.id == trackerId) {
+        tracker.habits.forEach((habit) => {
+          if (habit.id == habitId) {
+            habit.achievements[index] = value
+          }
+        })
+      }
+    })
+    console.log(
+      "Rightbefore setLocalStgHabitTrackerData",
+      updatedData[0].habits[0].achievements
+    )
+    setLocalStgHabitTrackerData([...updatedData])
   }
 
   return {

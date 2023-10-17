@@ -1,31 +1,31 @@
-import { useHabitTracker } from "../../hooks/useHabitTracker"
+import { useState } from "react"
+import { UpdateHabitTrackerFN } from "../HabitTracker/HabitTypes"
 export type BoxProps = {
+  updateHabitTrackerData: UpdateHabitTrackerFN
   value: number
   index: number
   habitId: string
   trackerId: string
 }
 
-export const Box = ({ value, index, habitId, trackerId }: BoxProps) => {
-  const { updateHabitTrackerData } = useHabitTracker()
-  let colorByValue = "pink"
-
-  if (value == 1) {
-    colorByValue = "red"
-  }
-
+export const Box = ({
+  value,
+  index,
+  habitId,
+  trackerId,
+  updateHabitTrackerData,
+}: BoxProps) => {
+  const [boxColor, setBoxColor] = useState(value == 1 ? "red" : "pink")
   return (
     <div
       onClick={() => {
-        console.log("this box data is: ", value, index, habitId, trackerId)
-        //update local storageData
-
+        setBoxColor("red")
         updateHabitTrackerData(value == 0 ? 1 : 0, index, habitId, trackerId)
       }}
       style={{
         width: "20px",
         height: "20px",
-        backgroundColor: colorByValue,
+        backgroundColor: boxColor,
         borderColor: "black",
         margin: "3px",
       }}

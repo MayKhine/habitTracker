@@ -13,3 +13,10 @@ export type HabitProps = {
   name: string
   achievements: Array<number>
 }
+
+export type UpdateHabitTrackerFN = (
+  value: number,
+  index: number,
+  habitId: string,
+  trackerId: string
+) => void

@@ -1,9 +1,10 @@
 import { FC } from "react"
-import { HabitProps } from "./HabitTypes"
+import { HabitProps, UpdateHabitTrackerFN } from "./HabitTypes"
 import { Box } from "../UI/Box"
 type HBProps = {
   trackerId: string
   habit: HabitProps
+  updateHabitTrackerData: UpdateHabitTrackerFN
 }
 export const Habit: FC<HBProps> = (props: HBProps) => {
   return (
@@ -13,6 +14,8 @@ export const Habit: FC<HBProps> = (props: HBProps) => {
         {props.habit.achievements.map((item, index) => {
           return (
             <Box
+              updateHabitTrackerData={props.updateHabitTrackerData}
+              key={`${index}`}
               value={item}
               index={index}
               habitId={props.habit.id}
