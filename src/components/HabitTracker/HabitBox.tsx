@@ -1,6 +1,7 @@
-import { useState } from "react"
-import { UpdateHabitTrackerFN } from "../HabitTracker/HabitTypes"
-export type BoxProps = {
+import { UpdateHabitTrackerFN } from "./HabitTypes"
+import { light1, light3 } from "../UI/ColorPalette"
+
+export type HabitBoxProps = {
   updateHabitTrackerData: UpdateHabitTrackerFN
   value: number
   index: number
@@ -8,23 +9,22 @@ export type BoxProps = {
   trackerId: string
 }
 
-export const Box = ({
+export const HabitBox = ({
   value,
   index,
   habitId,
   trackerId,
   updateHabitTrackerData,
 }: BoxProps) => {
-  const [boxColor, setBoxColor] = useState(value == 1 ? "red" : "pink")
+  const boxColor = value == 0 ? light1 : light3
   return (
     <div
       onClick={() => {
-        setBoxColor("red")
         updateHabitTrackerData(value == 0 ? 1 : 0, index, habitId, trackerId)
       }}
       style={{
-        width: "20px",
-        height: "20px",
+        width: "1.5rem",
+        height: "1.5rem",
         backgroundColor: boxColor,
         borderColor: "black",
         margin: "3px",
