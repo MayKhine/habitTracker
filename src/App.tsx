@@ -149,4 +149,12 @@ function App() {
   )
 }
 
+{
+  /* <HabitTracker
+habitTracker={selectedHabitTracker}
+updateHabitTrackerData={updateHabitTrackerData}
+addHaibtToHabitTracker={addHaibtToHabitTracker}
+/> */
+}
+
 export default App

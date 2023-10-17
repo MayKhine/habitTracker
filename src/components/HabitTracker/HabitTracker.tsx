@@ -1,4 +1,4 @@
-import { dark1, light3 } from "../UI/ColorPalette"
+import { dark1, dark3, light3 } from "../UI/ColorPalette"
 import {
   AddHabitToHabitTrackerFN,
   HabitTrackerProps,
@@ -22,10 +22,13 @@ export const HabitTracker = (props: HabitTrackerDivProps) => {
   return (
     <div
       style={{
-        backgroundColor: "lightyellow",
         color: light3,
-        flexGrow: 1,
-        // overflow: "wrap",
+        flex: 1,
+        maxWidth: "100%",
+        display: "flex",
+        width: "100%",
+        flexDirection: "column",
+        backgroundColor: dark3,
       }}
     >
       <HabitTrackerHeader
@@ -38,6 +41,8 @@ export const HabitTracker = (props: HabitTrackerDivProps) => {
         trackerId={id}
         updateHabitTrackerData={props.updateHabitTrackerData}
         addHaibtToHabitTracker={props.addHaibtToHabitTracker}
+        startDate={startDate}
+        endDate={endDate}
       ></HabitList>
     </div>
   )

@@ -2,6 +2,7 @@ import { FC } from "react"
 import { HabitProps, UpdateHabitTrackerFN } from "./HabitTypes"
 import { HabitBox } from "./HabitBox"
 import { light2 } from "../UI/ColorPalette"
+import { HabitDates } from "./HabitDates"
 type HBProps = {
   trackerId: string
   habit: HabitProps
@@ -14,21 +15,26 @@ export const Habit: FC<HBProps> = ({
   updateHabitTrackerData,
 }: HBProps) => {
   return (
-    <div style={{ backgroundColor: "pink", flexWrap: "wrap" }}>
-      <div style={{ display: "flex", margin: "1rem" }}>
+    <div style={{ flex: 1, maxWidth: "100%" }}>
+      <div
+        style={{ margin: "1rem", flex: 1, maxWidth: "100%", display: "flex" }}
+      >
         <div
           style={{
             color: light2,
             marginRight: "1rem",
             alignSelf: "center",
-            width: "150px",
+            minWidth: "150px",
+            flex: 1,
+            maxWidth: "100%",
+            flexShrink: "0",
+            flexGrow: "0",
           }}
           key={habit.id}
         >
           {habit.name}
         </div>
-
-        <div style={{ display: "flex" }}>
+        <div style={{ maxWidth: "100%", display: "flex", flexWrap: "wrap" }}>
           {habit.achievements.map((item, index) => {
             return (
               <HabitBox

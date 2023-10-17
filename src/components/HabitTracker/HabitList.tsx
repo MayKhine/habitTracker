@@ -5,11 +5,14 @@ import {
 } from "./HabitTypes"
 import { Habit } from "./Habit"
 import { HabitInput } from "../UI/HabitInput"
+import { HabitDates } from "./HabitDates"
 export type HabitListProps = {
   trackerId: string
   habits: Array<HabitProps>
   updateHabitTrackerData: UpdateHabitTrackerFN
   addHaibtToHabitTracker: AddHabitToHabitTrackerFN
+  startDate: string
+  endDate: string
 }
 
 export const HabitList = ({
@@ -17,13 +20,16 @@ export const HabitList = ({
   habits,
   updateHabitTrackerData,
   addHaibtToHabitTracker,
+  startDate,
+  endDate,
 }: HabitListProps) => {
   return (
-    <div>
+    <div style={{ flex: 1, maxWidth: "100%" }}>
       <HabitInput
         addHaibtToHabitTracker={addHaibtToHabitTracker}
         trackerId={trackerId}
       ></HabitInput>
+      <HabitDates startDate={startDate} endDate={endDate}></HabitDates>
 
       {habits.map((habit) => {
         return (
