@@ -3,6 +3,13 @@ import { HabitTrackerProps } from "../components/HabitTracker/HabitTypes"
 
 const LOCAL_STORAGE_KEY = "useHabitTracker"
 
+export const calculateTotalDays = (startDate: string, endDate: string) => {
+  const date1 = new Date(startDate)
+  const date2 = new Date(endDate)
+  const diffTime = Math.abs(date2 - date1) + 1
+  return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+}
+
 const getLocalStorageHabitTrackerData = () => {
   const localStorageData = localStorage.getItem(LOCAL_STORAGE_KEY)
   if (!localStorageData) {
@@ -19,13 +26,6 @@ export const useHabitTracker = () => {
   const [localStgHabitTrackerData, setLocalStgHabitTrackerData] = useState(
     getLocalStorageHabitTrackerData
   )
-
-  const calculateTotalDays = (startDate: string, endDate: string) => {
-    const date1 = new Date(startDate)
-    const date2 = new Date(endDate)
-    const diffTime = Math.abs(date2 - date1) + 1
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-  }
 
   const createDefaultHabitAchievements = (days: number) => {
     const defaultHabitAchievements: Array<number> = []

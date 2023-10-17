@@ -1,18 +1,23 @@
+import { calculateTotalDays } from "../../hooks/useHabitTracker"
 export type HabitDatesProps = {
   startDate: string
   endDate: string
 }
 
 export const HabitDates = ({ startDate, endDate }: HabitDatesProps) => {
-  // create a date array from start date to end date
-  startDate = new Date(startDate)
-  endDate = new Date(endDate)
-  const dateArr = []
+  const dateArr: Array<Date> = []
+  const days = calculateTotalDays(startDate, endDate)
+  for (let i = 0; i <= days; i++) {
+    const curDate = new Date(startDate)
+    curDate.setDate(curDate.getDate() + i)
+    dateArr.push(curDate)
+  }
 
-  // for (let i = startDate; i <= endDate; i++) {
-  //   dateArr.push(i)
-  // }
-
-  console.log("dateArr: ", dateArr)
-  return <div>Habit Date</div>
+  return (
+    <div>
+      {dateArr.map((day) => {
+        return <div> {day.toDateString()}</div>
+      })}
+    </div>
+  )
 }
