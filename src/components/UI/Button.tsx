@@ -20,6 +20,7 @@ export const Button = (props: ButtonProps) => {
         fontSize: props.fontSize || "1.3rem",
         width: props.width || "90%",
         alignSelf: "center",
+        overflow: "hidden",
       }}
       onClick={props.onButtonClick}
     >

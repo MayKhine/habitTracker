@@ -20,7 +20,6 @@ export const CenterDiv = (props: CenterDivProps) => {
         height: props.height,
         margin: "15px",
         borderRadius: "15px",
-        height: "max-content",
         padding: "0px",
       }}
     >

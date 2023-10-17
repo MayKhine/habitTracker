@@ -1,5 +1,4 @@
 import { HabitTrackerProps } from "./HabitTypes"
-import { CenterDiv } from "../UI/CenteredDiv"
 import { Button } from "../UI/Button"
 import { light2 } from "../UI/ColorPalette"
 
@@ -10,7 +9,7 @@ export type HabitTrackerListProps = {
 }
 
 export const HabitTrackerList = (props: HabitTrackerListProps) => {
-  const { id, title, startDate, endDate } = props.habitTracker
+  const { id, title } = props.habitTracker
 
   const habitTrackerSelectHandler = () => {
     props.onHabitTrackerSelect(title, id)

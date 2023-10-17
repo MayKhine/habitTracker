@@ -1,12 +1,7 @@
 import { FC } from "react"
-import {
-  AddHabitToHabitTrackerFN,
-  HabitProps,
-  UpdateHabitTrackerFN,
-} from "./HabitTypes"
+import { HabitProps, UpdateHabitTrackerFN } from "./HabitTypes"
 import { HabitBox } from "./HabitBox"
 import { light2 } from "../UI/ColorPalette"
-import { HabitInput } from "../UI/HabitInput"
 type HBProps = {
   trackerId: string
   habit: HabitProps

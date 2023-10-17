@@ -20,7 +20,14 @@ export const HabitTracker = (props: HabitTrackerDivProps) => {
 
   const { id, title, startDate, endDate, habits } = props.habitTracker[0]
   return (
-    <div style={{ backgroundColor: dark1, color: light3, flexGrow: "1" }}>
+    <div
+      style={{
+        backgroundColor: "lightyellow",
+        color: light3,
+        flexGrow: 1,
+        // overflow: "wrap",
+      }}
+    >
       <HabitTrackerHeader
         title={title}
         startDate={startDate}

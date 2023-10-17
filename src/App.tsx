@@ -98,12 +98,22 @@ function App() {
               flexDirection: "column",
             }}
           >
+            <div
+              style={{
+                display: "flex",
+                alignSelf: "center",
+                fontSize: "1.5rem",
+                color: light2,
+              }}
+            >
+              Habit Trackers
+            </div>
             <Button
               backgroundColor={light2}
               onButtonClick={() => {
                 setShowHabitTrackerForm(true)
               }}
-              text="Create"
+              text="+ Add Habit Tracker"
             ></Button>
 
             <div
