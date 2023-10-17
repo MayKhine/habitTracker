@@ -27,6 +27,18 @@ export const useHabitTracker = () => {
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24))
   }
 
+  const createDefaultHabitAchievements = (days: number) => {
+    const defaultHabitAchievements: Array<number> = []
+    for (let i = 0; i < days; i++) {
+      if (i == 0) {
+        defaultHabitAchievements.push(1)
+      } else {
+        defaultHabitAchievements.push(0)
+      }
+    }
+    return defaultHabitAchievements
+  }
+
   useEffect(() => {
     console.log(
       "useEffect localStgHabitTrackerData change, set to localstr",
@@ -40,17 +52,20 @@ export const useHabitTracker = () => {
     startDate: string,
     endDate: string
   ) => {
-    const defaultHabitAchievements: Array<number> = []
+    // const defaultHabitAchievements: Array<number> = []
 
     const totalTrackingDays = calculateTotalDays(startDate, endDate)
 
-    for (let i = 0; i < totalTrackingDays; i++) {
-      if (i == 0) {
-        defaultHabitAchievements.push(1)
-      } else {
-        defaultHabitAchievements.push(0)
-      }
-    }
+    // for (let i = 0; i < totalTrackingDays; i++) {
+    //   if (i == 0) {
+    //     defaultHabitAchievements.push(1)
+    //   } else {
+    //     defaultHabitAchievements.push(0)
+    //   }
+    // }
+
+    const defaultHabitAchievements =
+      createDefaultHabitAchievements(totalTrackingDays)
 
     const newHabitTracker = {
       id: Math.random(),
@@ -99,10 +114,32 @@ export const useHabitTracker = () => {
     setLocalStgHabitTrackerData([...updatedData])
   }
 
+  const addHaibtToHabitTracker = (habitName: string, trackerId: string) => {
+    console.log("Add Habit to Tracker: ", habitName, trackerId)
+    localStgHabitTrackerData.forEach((tracker: HabitTrackerProps) => {
+      if (tracker.id == trackerId) {
+        const totalTrackingDays = calculateTotalDays(
+          tracker.startDate,
+          tracker.endDate
+        )
+
+        const defaultHabitAchievements =
+          createDefaultHabitAchievements(totalTrackingDays)
+
+        tracker.habits.push({
+          id: Math.random(),
+          name: habitName,
+          achievements: defaultHabitAchievements,
+        })
+      }
+    })
+    setLocalStgHabitTrackerData([...localStgHabitTrackerData])
+  }
   return {
     localStgHabitTrackerData,
     addHabitTrackerData,
     updateHabitTrackerData,
+    addHaibtToHabitTracker,
   }
 }
 

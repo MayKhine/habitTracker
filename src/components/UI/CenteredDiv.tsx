@@ -11,14 +11,17 @@ export const CenterDiv = (props: CenterDivProps) => {
     <div
       onClick={props.onClick}
       style={{
+        cursor: "pointer",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: props.backgroundColor,
         width: props.width,
         height: props.height,
-        margin: "3px",
+        margin: "15px",
         borderRadius: "15px",
+        height: "max-content",
+        padding: "0px",
       }}
     >
       {props.children}

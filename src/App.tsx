@@ -15,6 +15,7 @@ function App() {
     localStgHabitTrackerData,
     addHabitTrackerData,
     updateHabitTrackerData,
+    addHaibtToHabitTracker,
   } = useHabitTracker()
 
   const [showHabitTrackerForm, setShowHabitTrackerForm] = useState(false)
@@ -64,11 +65,39 @@ function App() {
   }, [selectedHabitTrackerID, localStgHabitTrackerData])
 
   return (
-    <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        backgroundColor: "red",
+      }}
+    >
+      {showHabitTrackerForm && (
+        <Modal
+          // width="100%"
+          // height="100%"
+          backgroundColor={light2}
+          onCloseModal={closeHabitTrackerFormHandler}
+        >
+          <HabitTrackerForm
+            backgroundColor={light2}
+            onCreateHabitTracker={createHabitTrackerHandler}
+          />
+        </Modal>
+      )}
       <MainHeader />
+
       <div className={classes.mainContent}>
         <SideBar>
-          <>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+            }}
+          >
             <Button
               backgroundColor={light2}
               onButtonClick={() => {
@@ -76,20 +105,14 @@ function App() {
               }}
               text="Create"
             ></Button>
-            {showHabitTrackerForm && (
-              <Modal
-                width="100%"
-                height="100%"
-                backgroundColor={light2}
-                onCloseModal={closeHabitTrackerFormHandler}
-              >
-                <HabitTrackerForm
-                  backgroundColor={light2}
-                  onCreateHabitTracker={createHabitTrackerHandler}
-                />
-              </Modal>
-            )}
-            <div>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column",
+              }}
+            >
               {localStgHabitTrackerData.map((item: HabitTrackerProps) => {
                 return (
                   <HabitTrackerList
@@ -101,12 +124,14 @@ function App() {
                 )
               })}
             </div>
-          </>
+          </div>
         </SideBar>
+
         {showSelectedHabitTracker && (
           <HabitTracker
             habitTracker={selectedHabitTracker}
             updateHabitTrackerData={updateHabitTrackerData}
+            addHaibtToHabitTracker={addHaibtToHabitTracker}
           />
         )}
       </div>

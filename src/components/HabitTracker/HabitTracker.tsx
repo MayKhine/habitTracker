@@ -1,11 +1,16 @@
 import { dark1, light3 } from "../UI/ColorPalette"
-import { HabitTrackerProps, UpdateHabitTrackerFN } from "./HabitTypes"
+import {
+  AddHabitToHabitTrackerFN,
+  HabitTrackerProps,
+  UpdateHabitTrackerFN,
+} from "./HabitTypes"
 import { HabitTrackerHeader } from "../Layout/HabitTrackerHeader"
 import { HabitList } from "./HabitList"
 
 export type HabitTrackerDivProps = {
   habitTracker: Array<HabitTrackerProps>
   updateHabitTrackerData: UpdateHabitTrackerFN
+  addHaibtToHabitTracker: AddHabitToHabitTrackerFN
 }
 
 export const HabitTracker = (props: HabitTrackerDivProps) => {
@@ -25,6 +30,7 @@ export const HabitTracker = (props: HabitTrackerDivProps) => {
         habits={habits}
         trackerId={id}
         updateHabitTrackerData={props.updateHabitTrackerData}
+        addHaibtToHabitTracker={props.addHaibtToHabitTracker}
       ></HabitList>
     </div>
   )

@@ -15,7 +15,7 @@ export const HabitBox = ({
   habitId,
   trackerId,
   updateHabitTrackerData,
-}: BoxProps) => {
+}: HabitBoxProps) => {
   const boxColor = value == 0 ? light1 : light3
   return (
     <div

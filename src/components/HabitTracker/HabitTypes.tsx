@@ -20,3 +20,8 @@ export type UpdateHabitTrackerFN = (
   habitId: string,
   trackerId: string
 ) => void
+
+export type AddHabitToHabitTrackerFN = (
+  habitName: string,
+  trackerId: string
+) => void

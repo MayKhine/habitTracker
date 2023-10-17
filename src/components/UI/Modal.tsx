@@ -49,8 +49,8 @@ const ModalOverLay = (props: ModalOverLayProps) => {
 }
 
 type ModalProps = {
-  width: string
-  height: string
+  // width?: string
+  // height?: string
   backgroundColor: string
   children: JSX.Element
   onCloseModal: () => void
@@ -62,8 +62,8 @@ export const Modal = (props: ModalProps) => {
   return (
     <div
       style={{
-        width: props.width,
-        height: props.height,
+        // width: props.width,
+        // height: props.height,
         backgroundColor: props.backgroundColor,
       }}
     >

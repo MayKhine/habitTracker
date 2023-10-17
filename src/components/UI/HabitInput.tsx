@@ -1,16 +1,27 @@
 import { useState } from "react"
 import { Button } from "./Button"
-import { light2 } from "./ColorPalette"
-export const HabitInput = () => {
+import { dark2, light2, light3 } from "./ColorPalette"
+import { AddHabitToHabitTrackerFN } from "../HabitTracker/HabitTypes"
+
+export type HabitInputProps = {
+  addHaibtToHabitTracker: AddHabitToHabitTrackerFN
+  trackerId: string
+}
+export const HabitInput = ({
+  addHaibtToHabitTracker,
+  trackerId,
+}: HabitInputProps) => {
   const [habit, setHabit] = useState("")
   return (
     <div
       style={{
-        marginLeft: "1rem",
-        marginRight: "1rem",
+        paddingLeft: "1rem",
+        paddingRight: "1rem",
         display: "flex",
         alignItems: "center",
         gap: "1rem",
+        backgroundColor: light3,
+        color: dark2,
       }}
     >
       <label>Habit: </label>
@@ -29,7 +40,8 @@ export const HabitInput = () => {
       ></input>
       <Button
         onButtonClick={() => {
-          console.log("add habit to local stg", habit)
+          addHaibtToHabitTracker(habit, trackerId)
+          setHabit("")
         }}
         backgroundColor={light2}
         text="Add"

@@ -1,5 +1,7 @@
 import { HabitTrackerProps } from "./HabitTypes"
 import { CenterDiv } from "../UI/CenteredDiv"
+import { Button } from "../UI/Button"
+import { light2 } from "../UI/ColorPalette"
 
 export type HabitTrackerListProps = {
   habitTracker: HabitTrackerProps
@@ -14,22 +16,27 @@ export const HabitTrackerList = (props: HabitTrackerListProps) => {
     props.onHabitTrackerSelect(title, id)
   }
   return (
-    <CenterDiv
-      height="30px"
-      backgroundColor={props.backgroundColor}
-      onClick={habitTrackerSelectHandler}
-    >
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <div>{title} </div>
-        <div>{startDate} </div>
-        <div>{endDate} </div>
-      </div>
-    </CenterDiv>
+    // <CenterDiv
+    //   width="300px"
+    //   height="30px"
+    //   backgroundColor={props.backgroundColor}
+    //   onClick={habitTrackerSelectHandler}
+    // >
+    //   <div
+    //     style={{
+    //       display: "flex",
+    //       flexDirection: "row",
+    //       justifyContent: "space-between",
+    //     }}
+    //   >
+    //     <div>{title} </div>
+    //   </div>
+    // </CenterDiv>
+
+    <Button
+      backgroundColor={light2}
+      text={title}
+      onButtonClick={habitTrackerSelectHandler}
+    ></Button>
   )
 }
