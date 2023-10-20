@@ -1,3 +1,4 @@
+import { DateTime } from "luxon"
 import { calculateTotalDays } from "../../hooks/useHabitTracker"
 export type HabitDatesProps = {
   startDate: string
@@ -11,6 +12,7 @@ export const HabitDates = ({ startDate, endDate }: HabitDatesProps) => {
     const curDate = new Date(startDate)
     curDate.setDate(curDate.getDate() + i)
     dateArr.push(curDate)
+    console.log(curDate.toLocaleDateString("mm/dd"))
   }
 
   return (
