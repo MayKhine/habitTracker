@@ -1,4 +1,4 @@
-import { dark1, dark3, light3 } from "../UI/ColorPalette"
+import { dark3, light3 } from "../UI/ColorPalette"
 import {
   AddHabitToHabitTrackerFN,
   HabitTrackerProps,

@@ -42,7 +42,7 @@ export const useHabitTracker = () => {
   useEffect(() => {
     console.log(
       "useEffect localStgHabitTrackerData change, set to localstr",
-      localStgHabitTrackerData[0].habits[0].achievements
+      localStgHabitTrackerData[0]?.habits[0]?.achievements
     )
     setLocalStorageHabitTrackerData(localStgHabitTrackerData)
   }, [localStgHabitTrackerData])
@@ -55,14 +55,6 @@ export const useHabitTracker = () => {
     // const defaultHabitAchievements: Array<number> = []
 
     const totalTrackingDays = calculateTotalDays(startDate, endDate)
-
-    // for (let i = 0; i < totalTrackingDays; i++) {
-    //   if (i == 0) {
-    //     defaultHabitAchievements.push(1)
-    //   } else {
-    //     defaultHabitAchievements.push(0)
-    //   }
-    // }
 
     const defaultHabitAchievements =
       createDefaultHabitAchievements(totalTrackingDays)
