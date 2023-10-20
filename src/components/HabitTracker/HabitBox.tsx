@@ -20,13 +20,18 @@ export const HabitBox = ({
   return (
     <div
       onClick={() => {
-        updateHabitTrackerData(value == 0 ? 1 : 0, index, habitId, trackerId)
+        if (index && habitId && trackerId) {
+          console.log("this is clicked: ", index, habitId)
+          updateHabitTrackerData(value == 0 ? 1 : 0, index, habitId, trackerId)
+        }
       }}
       style={{
-        minWidth: "1.5rem",
-        minHeight: "1.5rem",
-        maxWidth: "1.5rem",
-        maxHeight: "1.5rem",
+        display: "flex",
+        flexDirection: "row",
+        minWidth: "2rem",
+        minHeight: "2rem",
+        maxWidth: "2rem",
+        maxHeight: "2rem",
         backgroundColor: boxColor,
         borderColor: "black",
         margin: "3px",
@@ -34,6 +39,6 @@ export const HabitBox = ({
         cursor: "pointer",
         flexShrink: "0",
       }}
-    ></div>
+    />
   )
 }
