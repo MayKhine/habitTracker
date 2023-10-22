@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { HabitTrackerFormDiv } from "../UI/HabitTrackerFormDiv"
+import { DateTime } from "luxon"
 import { Button } from "../UI/Button"
 export type HabitTrackerFormProp = {
   backgroundColor: string
@@ -14,6 +15,31 @@ export const HabitTrackerForm = (props: HabitTrackerFormProp) => {
   const [habitTrackerTitle, setHabitTrackerTitle] = useState("")
   const [habitTrackerStartDate, setHabitTrackerStartDate] = useState("")
   const [habitTracketEndDate, setHabitTrackerEndDate] = useState("")
+  const [habitTrackerInputValid, setHabitTrackerInputValid] = useState(false)
+  const [error, setError] = useState("")
+
+  const end = DateTime.fromISO("2017-03-13")
+  const start = DateTime.fromISO("2017-02-11")
+  const difdate = end.diff(start, ["months", "days"]).toObject()
+
+  console.log("difdate: ", difdate)
+  const checkHabitTrackerInputForm = () =>
+    // habitTrackerTitle,
+    // habitTrackerStartDate,
+    // habitTracketEndDate
+    {
+      if (habitTrackerTitle == null) {
+        setError("Habit Tracker Title cannot be empty.")
+        setHabitTrackerInputValid(false)
+      }
+
+      const luxonStartDate = DateTime.fromISO(habitTrackerStartDate)
+      const luxonEndDate = DateTime.fromISO(habitTracketEndDate)
+      const difdate = luxonEndDate
+        .diff(luxonStartDate, ["months", "days"])
+        .toObject()
+      console.log("luxondate: ", difdate)
+    }
 
   return (
     <HabitTrackerFormDiv>
@@ -54,6 +80,7 @@ export const HabitTrackerForm = (props: HabitTrackerFormProp) => {
             setHabitTrackerTitle("")
             setHabitTrackerStartDate("")
             setHabitTrackerEndDate("")
+            checkHabitTrackerInputForm()
             props.onCreateHabitTracker({
               title: habitTrackerTitle,
               startDate: habitTrackerStartDate,

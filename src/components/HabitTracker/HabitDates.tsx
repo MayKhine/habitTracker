@@ -11,7 +11,10 @@ export const HabitDates = ({ startDate, endDate }: HabitDatesProps) => {
   const dateArr: Array<DateTime> = []
   const days: number = calculateTotalDays(startDate, endDate)
   const luxonStartDate = DateTime.fromISO(startDate)
+  const luxonEndDate = DateTime.fromISO(endDate)
+  const difDays = luxonEndDate.diff(luxonStartDate, ["days"]).toObject()
 
+  console.log("Habit Date: ", difDays)
   for (let i = 0; i < days; i++) {
     const curDate = luxonStartDate.plus({ days: i })
     dateArr.push(curDate)
