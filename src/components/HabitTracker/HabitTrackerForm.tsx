@@ -14,33 +14,49 @@ export type HabitTrackerFormProp = {
 export const HabitTrackerForm = (props: HabitTrackerFormProp) => {
   const [habitTrackerTitle, setHabitTrackerTitle] = useState("")
   const [habitTrackerStartDate, setHabitTrackerStartDate] = useState("")
-  const [habitTracketEndDate, setHabitTrackerEndDate] = useState("")
+  const [habitTrackerEndDate, setHabitTrackerEndDate] = useState("")
+
+  const [titleValid, setTitleValid] = useState(true)
+  const [startDateValid, setStartDateValid] = useState(true)
+  const [endDateValid, setEndDatevalid] = useState(true)
+  const [error, setError] = useState(false)
   const [habitTrackerInputValid, setHabitTrackerInputValid] = useState(false)
-  const [error, setError] = useState("")
+  const checkHabitTrackerInputForm = () => {
+    console.log("wht is date: ", habitTrackerStartDate, habitTrackerEndDate)
+    habitTrackerTitle.length <= 0 ? setTitleValid(false) : setTitleValid(true)
+    habitTrackerStartDate.length <= 0
+      ? setStartDateValid(false)
+      : setStartDateValid(true)
+    habitTrackerEndDate.length <= 0
+      ? setEndDatevalid(false)
+      : setEndDatevalid(true)
 
-  const end = DateTime.fromISO("2017-03-13")
-  const start = DateTime.fromISO("2017-02-11")
-  const difdate = end.diff(start, ["months", "days"]).toObject()
+    const luxonStartDate = DateTime.fromISO(habitTrackerStartDate)
+    const luxonEndDate = DateTime.fromISO(habitTrackerEndDate)
+    const difdate = luxonEndDate.diff(luxonStartDate, ["days"]).toObject()
+    console.log(
+      "difDays:",
+      difdate,
+      "titlevalid",
+      titleValid,
+      "startDateValid: ",
+      startDateValid,
+      "enddateValid",
+      endDateValid
+    )
 
-  console.log("difdate: ", difdate)
-  const checkHabitTrackerInputForm = () =>
-    // habitTrackerTitle,
-    // habitTrackerStartDate,
-    // habitTracketEndDate
-    {
-      if (habitTrackerTitle == null) {
-        setError("Habit Tracker Title cannot be empty.")
-        setHabitTrackerInputValid(false)
-      }
-
-      const luxonStartDate = DateTime.fromISO(habitTrackerStartDate)
-      const luxonEndDate = DateTime.fromISO(habitTracketEndDate)
-      const difdate = luxonEndDate
-        .diff(luxonStartDate, ["months", "days"])
-        .toObject()
-      console.log("luxondate: ", difdate)
+    if (difdate.days >= 1 && difdate.days <= 31) {
+      setHabitTrackerInputValid(true)
+      setHabitTrackerTitle("")
+      setHabitTrackerStartDate("")
+      setHabitTrackerEndDate("")
+      return
+    } else {
+      setError("Please pick days between 1 and 31. ")
+      setHabitTrackerInputValid(false)
+      return
     }
-
+  }
   return (
     <HabitTrackerFormDiv>
       <div>
@@ -53,6 +69,7 @@ export const HabitTrackerForm = (props: HabitTrackerFormProp) => {
               }}
               value={habitTrackerTitle}
             ></input>
+            {!titleValid && <p>Name cannot be empty.</p>}
           </div>
           <div>
             <label> Starting Date</label>
@@ -63,6 +80,7 @@ export const HabitTrackerForm = (props: HabitTrackerFormProp) => {
               }}
               value={habitTrackerStartDate}
             ></input>
+            {!startDateValid && <p>Date cannot be empty.</p>}
           </div>
           <div>
             <label> Ending Date</label>
@@ -71,21 +89,21 @@ export const HabitTrackerForm = (props: HabitTrackerFormProp) => {
               onChange={(event) => {
                 setHabitTrackerEndDate(event?.target.value)
               }}
-              value={habitTracketEndDate}
+              value={habitTrackerEndDate}
             ></input>
+            {!endDateValid && <p>Date cannot be empty.</p>}
           </div>
         </div>
+        {error && <div> {error}</div>}
         <Button
           onButtonClick={() => {
-            setHabitTrackerTitle("")
-            setHabitTrackerStartDate("")
-            setHabitTrackerEndDate("")
             checkHabitTrackerInputForm()
-            props.onCreateHabitTracker({
-              title: habitTrackerTitle,
-              startDate: habitTrackerStartDate,
-              endDate: habitTracketEndDate,
-            })
+            habitTrackerInputValid &&
+              props.onCreateHabitTracker({
+                title: habitTrackerTitle,
+                startDate: habitTrackerStartDate,
+                endDate: habitTrackerEndDate,
+              })
           }}
           text="Create"
           backgroundColor="pink"

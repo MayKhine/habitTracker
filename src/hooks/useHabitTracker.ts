@@ -40,10 +40,6 @@ export const useHabitTracker = () => {
   }
 
   useEffect(() => {
-    console.log(
-      "useEffect localStgHabitTrackerData change, set to localstr",
-      localStgHabitTrackerData[0]?.habits[0]?.achievements
-    )
     setLocalStorageHabitTrackerData(localStgHabitTrackerData)
   }, [localStgHabitTrackerData])
 

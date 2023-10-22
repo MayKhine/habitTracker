@@ -10,6 +10,7 @@ import { MainHeader } from "./components/Layout/MainHeader"
 import { SideBar } from "./components/Layout/SideBar"
 import { HabitTracker } from "./components/HabitTracker/HabitTracker"
 import { light2 } from "./components/UI/ColorPalette"
+import { DateTime } from "luxon"
 function App() {
   const {
     localStgHabitTrackerData,
@@ -32,11 +33,6 @@ function App() {
     endDate: string
   }) => {
     closeHabitTrackerFormHandler()
-
-    if (habitTrackerData.title.length == 0) {
-      return
-    }
-
     addHabitTrackerData(
       habitTrackerData.title,
       habitTrackerData.startDate,
@@ -136,7 +132,6 @@ function App() {
             </div>
           </div>
         </SideBar>
-
         {showSelectedHabitTracker && (
           <HabitTracker
             habitTracker={selectedHabitTracker}
