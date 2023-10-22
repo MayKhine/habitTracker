@@ -20,10 +20,8 @@ export const HabitBox = ({
   return (
     <div
       onClick={() => {
-        if (index && habitId && trackerId) {
-          console.log("this is clicked: ", index, habitId)
-          updateHabitTrackerData(value == 0 ? 1 : 0, index, habitId, trackerId)
-        }
+        console.log("this is clicked: ", index, habitId)
+        updateHabitTrackerData(value == 0 ? 1 : 0, index, habitId, trackerId)
       }}
       style={{
         display: "flex",

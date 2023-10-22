@@ -43,7 +43,7 @@ export const HabitDates = ({ startDate, endDate }: HabitDatesProps) => {
               margin: "3px",
               flex: 1,
               flexShrink: "0",
-              color: "red",
+              color: "black",
               fontSize: ".7rem",
               fontWeight: "900",
             }}

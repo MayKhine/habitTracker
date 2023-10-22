@@ -1,6 +1,7 @@
 import { HabitTrackerProps } from "./HabitTypes"
 import { Button } from "../UI/Button"
 import { light2 } from "../UI/ColorPalette"
+import { CenterDiv } from "../UI/CenteredDiv"
 
 export type HabitTrackerListProps = {
   habitTracker: HabitTrackerProps
