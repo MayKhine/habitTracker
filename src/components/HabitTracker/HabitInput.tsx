@@ -29,24 +29,37 @@ export const HabitInput = ({
         display: "flex",
         alignItems: "center",
         gap: "1rem",
-        backgroundColor: light3,
+        backgroundColor: "gray",
         color: dark2,
+        height: "70px",
+        // width: "100%",
+        paddingBottom: "5px",
       }}
     >
       <label>Habit: </label>
-      <input
-        value={habit}
-        onChange={(event) => {
-          setHabit(event?.target.value)
-        }}
+      <div
         style={{
           width: "100%",
           height: "2rem",
-          borderRadius: "15px",
-          border: "0px",
-          paddingLeft: "10px",
+          paddingRight: "5px",
         }}
-      ></input>
+      >
+        <input
+          value={habit}
+          onChange={(event) => {
+            setError(false)
+            setHabit(event?.target.value)
+          }}
+          style={{
+            width: "100%",
+            height: "2rem",
+            borderRadius: "15px",
+            border: "0px",
+            paddingLeft: "10px",
+          }}
+        ></input>
+        {error && <ErrorText text="Habit text cannot be empty." />}
+      </div>
       <Button
         onButtonClick={() => {
           checkHabitInput()
@@ -57,7 +70,6 @@ export const HabitInput = ({
         fontSize="1rem"
         height="2rem"
       />
-      {error && <ErrorText text="Habit text cannot be empty." />}
     </div>
   )
 }
