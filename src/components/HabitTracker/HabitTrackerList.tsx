@@ -1,8 +1,8 @@
 import { HabitTrackerProps } from "./HabitTypes"
 import { Button } from "../UI/Button"
 import { light2 } from "../UI/ColorPalette"
-import { CenterDiv } from "../UI/CenteredDiv"
-
+// import { CenterDiv } from "../UI/CenteredDiv"
+import { SideBarDiv } from "../UI/SideBarDiv"
 export type HabitTrackerListProps = {
   habitTracker: HabitTrackerProps
   backgroundColor: string
@@ -33,10 +33,19 @@ export const HabitTrackerList = (props: HabitTrackerListProps) => {
     //   </div>
     // </CenterDiv>
 
-    <Button
+    // <Button
+    //   backgroundColor={light2}
+    //   text={title}
+    //   onButtonClick={habitTrackerSelectHandler}
+    // ></Button>
+
+    <SideBarDiv
       backgroundColor={light2}
       text={title}
-      onButtonClick={habitTrackerSelectHandler}
-    ></Button>
+      onSelectClick={habitTrackerSelectHandler}
+      onDeleteClick={() => {
+        console.log("Delete is clicked")
+      }}
+    ></SideBarDiv>
   )
 }

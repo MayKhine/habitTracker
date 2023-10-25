@@ -2,6 +2,14 @@
 
 ## React + TypeScript + Vite
 
+- to do
+
+  - add delete function for tracker list
+  - add edit function for tracker list
+
+  - add delete function for habit list
+  - add edit function for habit list
+
 - project creation
 
   > pnpm create vite@latest habitTracker --template react-ts
