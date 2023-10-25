@@ -1,8 +1,8 @@
 import { useState } from "react"
-import { Button } from "./Button"
-import { dark2, light2, light3 } from "./ColorPalette"
-import { AddHabitToHabitTrackerFN } from "../HabitTracker/HabitTypes"
-
+import { Button } from "../UI/Button"
+import { dark2, light2, light3 } from "../UI/ColorPalette"
+import { AddHabitToHabitTrackerFN } from "./HabitTypes"
+import { ErrorText } from "../UI/ErrorText"
 export type HabitInputProps = {
   addHaibtToHabitTracker: AddHabitToHabitTrackerFN
   trackerId: string
@@ -12,6 +12,15 @@ export const HabitInput = ({
   trackerId,
 }: HabitInputProps) => {
   const [habit, setHabit] = useState("")
+  const [error, setError] = useState(false)
+  const checkHabitInput = () => {
+    if (habit.trim().length > 0) {
+      addHaibtToHabitTracker(habit, trackerId)
+      setHabit("")
+    } else {
+      setError(true)
+    }
+  }
   return (
     <div
       style={{
@@ -40,8 +49,7 @@ export const HabitInput = ({
       ></input>
       <Button
         onButtonClick={() => {
-          addHaibtToHabitTracker(habit, trackerId)
-          setHabit("")
+          checkHabitInput()
         }}
         backgroundColor={light2}
         text="Add"
@@ -49,6 +57,7 @@ export const HabitInput = ({
         fontSize="1rem"
         height="2rem"
       />
+      {error && <ErrorText text="Habit text cannot be empty." />}
     </div>
   )
 }

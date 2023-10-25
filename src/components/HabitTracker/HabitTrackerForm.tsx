@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { HabitTrackerFormDiv } from "../UI/HabitTrackerFormDiv"
-import { DateTime } from "luxon"
 import { Button } from "../UI/Button"
+import { dateLength } from "../Util/Functions"
+import { ErrorText } from "../UI/ErrorText"
 export type HabitTrackerFormProp = {
   backgroundColor: string
   onCreateHabitTracker: (formData: {
@@ -19,91 +20,124 @@ export const HabitTrackerForm = (props: HabitTrackerFormProp) => {
   const [titleValid, setTitleValid] = useState(true)
   const [startDateValid, setStartDateValid] = useState(true)
   const [endDateValid, setEndDatevalid] = useState(true)
+
   const [error, setError] = useState(false)
-  const [habitTrackerInputValid, setHabitTrackerInputValid] = useState(false)
+
+  //check habit tracker input form
   const checkHabitTrackerInputForm = () => {
-    console.log("wht is date: ", habitTrackerStartDate, habitTrackerEndDate)
-    habitTrackerTitle.length <= 0 ? setTitleValid(false) : setTitleValid(true)
-    habitTrackerStartDate.length <= 0
-      ? setStartDateValid(false)
-      : setStartDateValid(true)
-    habitTrackerEndDate.length <= 0
-      ? setEndDatevalid(false)
-      : setEndDatevalid(true)
+    const checkTitle = habitTrackerTitle.trim().length > 0
+    const checkStartDate = habitTrackerStartDate.length > 0
+    const checkEndDate = habitTrackerEndDate.length > 0
 
-    const luxonStartDate = DateTime.fromISO(habitTrackerStartDate)
-    const luxonEndDate = DateTime.fromISO(habitTrackerEndDate)
-    const difdate = luxonEndDate.diff(luxonStartDate, ["days"]).toObject()
-    console.log(
-      "difDays:",
-      difdate,
-      "titlevalid",
-      titleValid,
-      "startDateValid: ",
-      startDateValid,
-      "enddateValid",
-      endDateValid
-    )
+    setTitleValid(checkTitle)
+    setStartDateValid(checkStartDate)
+    setEndDatevalid(checkEndDate)
 
-    if (difdate.days >= 1 && difdate.days <= 31) {
-      setHabitTrackerInputValid(true)
-      setHabitTrackerTitle("")
-      setHabitTrackerStartDate("")
-      setHabitTrackerEndDate("")
-      return
-    } else {
-      setError("Please pick days between 1 and 31. ")
-      setHabitTrackerInputValid(false)
-      return
+    if (checkTitle && checkStartDate && checkEndDate) {
+      const days = dateLength(habitTrackerStartDate, habitTrackerEndDate) || 0
+      console.log("days: ", days)
+      if (days >= 1 && days <= 5) {
+        props.onCreateHabitTracker({
+          title: habitTrackerTitle,
+          startDate: habitTrackerStartDate,
+          endDate: habitTrackerEndDate,
+        })
+      } else {
+        setError(true)
+        console.log("Error with dates: ")
+      }
     }
   }
   return (
     <HabitTrackerFormDiv>
-      <div>
+      <div style={{ height: "330px" }}>
         <div>
-          <div>
-            <label>Habit Tracker Name</label>
+          <div style={{ height: "80px" }}>
+            <label
+              style={{
+                display: "block",
+              }}
+            >
+              Habit Tracker Name
+            </label>
             <input
+              style={{
+                width: "300px",
+                height: "30px",
+                borderRadius: "10px",
+                border: "0px",
+                padding: "3px",
+              }}
               onChange={(event) => {
+                setTitleValid(true)
+                setError(false)
                 setHabitTrackerTitle(event.target.value)
               }}
               value={habitTrackerTitle}
             ></input>
-            {!titleValid && <p>Name cannot be empty.</p>}
+            {!titleValid && <ErrorText text="Name cannot be empty." />}
           </div>
-          <div>
-            <label> Starting Date</label>
+          <div style={{ height: "80px" }}>
+            <label
+              style={{
+                display: "block",
+              }}
+            >
+              Starting Date
+            </label>
             <input
+              style={{
+                width: "150px",
+                height: "30px",
+                borderRadius: "10px",
+                border: "0px",
+                padding: "3px",
+              }}
               type="date"
               onChange={(event) => {
+                setStartDateValid(true)
+                setError(false)
                 setHabitTrackerStartDate(event?.target.value)
               }}
               value={habitTrackerStartDate}
             ></input>
-            {!startDateValid && <p>Date cannot be empty.</p>}
+            {!startDateValid && <ErrorText text="Date cannot be empty." />}
           </div>
-          <div>
-            <label> Ending Date</label>
+          <div style={{ height: "80px" }}>
+            <label
+              style={{
+                display: "block",
+              }}
+            >
+              Ending Date
+            </label>
             <input
+              style={{
+                width: "150px",
+                height: "30px",
+                borderRadius: "10px",
+                border: "0px",
+                padding: "3px",
+              }}
               type="date"
               onChange={(event) => {
+                setEndDatevalid(true)
+                setError(false)
                 setHabitTrackerEndDate(event?.target.value)
               }}
               value={habitTrackerEndDate}
             ></input>
-            {!endDateValid && <p>Date cannot be empty.</p>}
+            {!endDateValid && <ErrorText text="Date cannot be empty." />}
           </div>
         </div>
-        {error && <div> {error}</div>}
+        <div style={{ height: "20px", paddingBottom: "10px" }}>
+          {error && (
+            <ErrorText text="Please select tracker dates with a length ranging from 1 to 5." />
+          )}
+        </div>
         <Button
           onButtonClick={() => {
             checkHabitTrackerInputForm()
-            habitTrackerInputValid &&
-              props.onCreateHabitTracker({
-                title: habitTrackerTitle,
-                startDate: habitTrackerStartDate,
-                endDate: habitTrackerEndDate,
-              })
           }}
           text="Create"
           backgroundColor="pink"

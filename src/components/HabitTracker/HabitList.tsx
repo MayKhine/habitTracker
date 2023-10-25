@@ -4,7 +4,7 @@ import {
   UpdateHabitTrackerFN,
 } from "./HabitTypes"
 import { Habit } from "./Habit"
-import { HabitInput } from "../UI/HabitInput"
+import { HabitInput } from "./HabitInput"
 import { HabitDates } from "./HabitDates"
 export type HabitListProps = {
   trackerId: string
